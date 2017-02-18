@@ -11,9 +11,9 @@ public class HealthCheck {
 	
 	public static void main(String args[]){
 		
-		get("/healthcheck", (req, res) -> {
+		get("/healthcheck", "application/json",  (req, res) -> {
 			logger.info("health check called");
-			return "spark app is running healthy";
-		});
+			return new Health(200L, "spark app is running healthy");
+		}, new JsonTransformer());
 	}
 }
