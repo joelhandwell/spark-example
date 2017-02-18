@@ -35,4 +35,5 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:3.6.+'
+    testCompile 'io.rest-assured:rest-assured:3.0.+'
 }
