@@ -9,6 +9,9 @@
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
+apply plugin: 'application'
+
+version = '1.0'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -37,3 +40,19 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.6.+'
     testCompile 'io.rest-assured:rest-assured:3.0.+'
 }
+
+mainClassName = 'hello.HealthCheck'
+
+task fatJar (type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'A micro service',
+        'Implementation-Version': version,
+        'Main-Class': mainClassName
+    }
+    baseName = 'java-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+jar.dependsOn fatJar
+
